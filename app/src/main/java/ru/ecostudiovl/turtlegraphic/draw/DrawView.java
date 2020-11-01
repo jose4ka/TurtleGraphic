@@ -1,4 +1,4 @@
-package ru.ecostudiovl.turtlegraphic;
+package ru.ecostudiovl.turtlegraphic.draw;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,7 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     private DrawThread drawThread;
+    private float frameTime = 1;
 
     public DrawView(Context context){
         super(context);
@@ -21,7 +22,7 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void startDrawThread(){
-        drawThread = new DrawThread(getHolder());
+        drawThread = new DrawThread(getHolder(), this);
         //Устанавливаем переменуую как true, это нужно для управления потоком
         drawThread.setRunning(true);
         //Стартуем поток
@@ -55,5 +56,13 @@ public class DrawView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+    }
+
+    public float getFrameTime() {
+        return frameTime;
+    }
+
+    public void setFrameTime(float frameTime) {
+        this.frameTime = frameTime;
     }
 }

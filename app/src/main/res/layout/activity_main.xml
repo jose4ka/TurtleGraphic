@@ -14,11 +14,29 @@
         android:max="1000"
         android:min="1"/>
 
-    <FrameLayout
-        android:id="@+id/frameGraphics"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    </FrameLayout>
+        <EditText
+            android:id="@+id/etFigureName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnEnter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENTER"/>
+
+    </LinearLayout>
+
+    <ru.ecostudiovl.turtlegraphic.activity.MyTurtleView
+        android:id="@+id/myView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
 
 </LinearLayout>

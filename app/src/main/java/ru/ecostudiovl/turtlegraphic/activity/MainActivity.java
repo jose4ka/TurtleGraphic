@@ -3,33 +3,46 @@ package ru.ecostudiovl.turtlegraphic.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
 
 import ru.ecostudiovl.turtlegraphic.R;
-import ru.ecostudiovl.turtlegraphic.draw.DrawView;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private DrawView drawView;
+    private MyTurtleView myTurtleView;
     private FrameLayout graphicFrame;
     private SeekBar seekBar;
+    private Button btnEnter;
+    private EditText etName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        graphicFrame = findViewById(R.id.frameGraphics);
+        myTurtleView = findViewById(R.id.myView);
 
-        createView();
+        etName = findViewById(R.id.etFigureName);
+        btnEnter = findViewById(R.id.btnEnter);
+        btnEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!etName.getText().toString().isEmpty() && etName.getText().toString().length() > 0){
+                    myTurtleView.setFigure(etName.getText().toString());
+                }
+            }
+        });
+
 
         seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                drawView.setFrameTime((float)progress);
             }
 
             @Override
@@ -43,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
-    private void createView(){
-        drawView = new DrawView(this);
-        graphicFrame.addView(drawView);
-    }
 }

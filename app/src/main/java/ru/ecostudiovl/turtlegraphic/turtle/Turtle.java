@@ -2,11 +2,15 @@ package ru.ecostudiovl.turtlegraphic.turtle;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 
 public class Turtle {
 
     private float posX;
     private float posY;
+
+    private float posX0;
+    private float posY0;
 
     private float angle;
 
@@ -24,17 +28,20 @@ public class Turtle {
 
     public void draw(float delta, Canvas canvas, Paint paint){
 
-        float lX = posX;
-        float lY = posY;
+
+        float posX0 = posX;
+        float posY0 = posY;
 
         posX = posX + delta * (float) Math.cos(angle);
         posY = posY + delta * (float) Math.sin(angle);
+        paint.setAntiAlias(true);
 
-        canvas.drawLine(lX, lY, posX, posY, paint);
+        canvas.drawLine(posX0, posY0, posX, posY, paint);
     }
 
-    public void move(){
-
+    public void move(float delta){
+        posX = posX + delta * (float) Math.cos(angle);
+        posY = posY + delta * (float) Math.sin(angle);
     }
 
     public void plusAngle(float teta){
@@ -48,10 +55,23 @@ public class Turtle {
     public void drawSpiral(Canvas canvas, Paint paint){
         draw(dl, canvas, paint);
         plusAngle(5);
-        dl += 0.01;
+        dl += 0.05;
     }
 
-//GETTERS/SETTERS
+    public void drawSquare(Canvas canvas, Paint paint){
+        dl = 200;
+        draw(dl, canvas, paint);
+        plusAngle(90);
+    }
+
+    public void drawCircle(Canvas canvas, Paint paint){
+        dl = 5;
+        draw(dl, canvas, paint);
+        plusAngle(1);
+    }
+
+
+    //GETTERS/SETTERS
     public float getPosX() {
         return posX;
     }

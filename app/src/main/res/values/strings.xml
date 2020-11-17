@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TurtleGraphic</string>
+    <string-array name="figures">
+        <item>Спираль</item>
+        <item>Квадрат</item>
+        <item>Круг</item>
+        <item>Квадратная спираль</item>
+        <item>Шестиугольник</item>
+    </string-array>
 </resources>

@@ -4,21 +4,20 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
-import ru.ecostudiovl.turtlegraphic.turtle.Turtle;
+import ru.ecostudiovl.turtlegraphic.turtle.TurtlePainter;
 
 public class MyTurtleView extends View {
 
-    private Turtle turtle;
+    private TurtlePainter turtle;
 
-    private String figure;
+    private int figure;
 
     public MyTurtleView(Context context, AttributeSet att){
         super(context, att);
-        this.figure = "spiral";
+        this.figure = 0;
     }
 
     @Override
@@ -30,59 +29,36 @@ public class MyTurtleView extends View {
         invalidate();
     }
 
-    private void drawSpiral(Canvas canvas, Paint p){
-        turtle = new Turtle(canvas.getWidth()/2, canvas.getHeight()/2, 0);
-
-        for (int i = 0; i < 500; i++) {
-            turtle.drawSpiral(canvas, p);
-        }
-    }
-
-    private void drawSquare(Canvas canvas, Paint p){
-        turtle = new Turtle(canvas.getWidth()/3, canvas.getHeight()/3, 0);
-
-        for (int i = 0; i < 5; i++) {
-            turtle.drawSquare(canvas, p);
-        }
-    }
-
-    private void drawCircle(Canvas canvas, Paint p){
-        turtle = new Turtle(canvas.getWidth()/2, canvas.getHeight()/3, 0);
-
-        for (int i = 0; i < 360; i++) {
-            turtle.drawCircle(canvas, p);
-        }
-    }
 
     private void checkDraw(Canvas canvas, Paint p){
+
+        turtle = new TurtlePainter(canvas.getWidth()/2, canvas.getHeight()/2, 0);
+
         switch (figure){
-            case "spiral":
-                drawSpiral(canvas, p);
+            case 0:
+                turtle.drawSpiral(canvas, p);
                 break;
-            case "square":
-                drawSquare(canvas, p);
+            case 1:
+                turtle = new TurtlePainter(canvas.getWidth()/3, canvas.getHeight()/3, 0);
+                turtle.drawSquare(canvas, p);
                 break;
-            case "circle":
-                drawCircle(canvas, p);
+            case 2:
+                turtle = new TurtlePainter(canvas.getWidth()/2, canvas.getHeight()/3, 0);
+                turtle.drawCircle(canvas, p);
+                break;
+            case 3:
+                turtle.drawSquareSpiral(canvas, p);
+                break;
+            case 4:
+                turtle = new TurtlePainter(canvas.getWidth()/3, canvas.getHeight()/3, 0);
+                turtle.drawHexagon(canvas, p);
                 break;
             default:
-                drawSpiral(canvas, p);
+                turtle.drawSpiral(canvas, p);
         }
     }
 
-    public Turtle getTurtle() {
-        return turtle;
-    }
-
-    public void setTurtle(Turtle turtle) {
-        this.turtle = turtle;
-    }
-
-    public String getFigure() {
-        return figure;
-    }
-
-    public void setFigure(String figure) {
+    public void setFigure(int figure) {
         this.figure = figure;
     }
 }

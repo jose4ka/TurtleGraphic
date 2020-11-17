@@ -1,3 +1,7 @@
+/*
+Основной класс черепашки, в котором описаны всё её основные дейсвтия и поля
+ */
+
 package ru.ecostudiovl.turtlegraphic.turtle;
 
 import android.graphics.Canvas;
@@ -6,29 +10,29 @@ import android.graphics.Path;
 
 public class Turtle {
 
-    private float posX;
-    private float posY;
+    //Позиция
+    protected float posX;
+    protected float posY;
 
-    private float posX0;
-    private float posY0;
+    //Угол поворота
+    protected float angle;
 
-    private float angle;
+    protected long height;
 
-    private long height;
+    //Шаг, с которым движется черепашка, используется при перемещении
+    protected float dl;
 
-    private float dl = 1;
-
+    //Конструктор
     public Turtle(float initX, float initY, float initAngle){
         posX = initX;
         posY = initY;
         angle = (initAngle * (float)Math.PI) / 180;
         height = 100;
-
+        dl = 1;
     }
 
+    //Основная процедура, которая рисует на холсте
     public void draw(float delta, Canvas canvas, Paint paint){
-
-
         float posX0 = posX;
         float posY0 = posY;
 
@@ -39,68 +43,28 @@ public class Turtle {
         canvas.drawLine(posX0, posY0, posX, posY, paint);
     }
 
+    //Процедура которая просто перемещает черепашку
     public void move(float delta){
         posX = posX + delta * (float) Math.cos(angle);
         posY = posY + delta * (float) Math.sin(angle);
     }
 
+    //Брибавляем угол поворота
     public void plusAngle(float teta){
         angle = angle + ((teta * (float)Math.PI) / 180);
     }
 
+    //Отнимаем угол поворота
     public void minusAngle(float teta){
         angle = angle - ((teta * (float)Math.PI) / 180);
     }
 
-    public void drawSpiral(Canvas canvas, Paint paint){
-        draw(dl, canvas, paint);
-        plusAngle(5);
-        dl += 0.05;
-    }
-
-    public void drawSquare(Canvas canvas, Paint paint){
-        dl = 200;
-        draw(dl, canvas, paint);
-        plusAngle(90);
-    }
-
-    public void drawCircle(Canvas canvas, Paint paint){
-        dl = 5;
-        draw(dl, canvas, paint);
-        plusAngle(1);
-    }
-
-
-    //GETTERS/SETTERS
-    public float getPosX() {
-        return posX;
-    }
-
-    public void setPosX(int posX) {
+    //Сеттеры
+    public void setPosX(float posX) {
         this.posX = posX;
     }
 
-    public float getPosY() {
-        return posY;
-    }
-
-    public void setPosY(int posY) {
+    public void setPosY(float posY) {
         this.posY = posY;
-    }
-
-    public float getAngle() {
-        return angle;
-    }
-
-    public void setAngle(float angle) {
-        this.angle = angle;
-    }
-
-    public long getHeight() {
-        return height;
-    }
-
-    public void setHeight(long height) {
-        this.height = height;
     }
 }

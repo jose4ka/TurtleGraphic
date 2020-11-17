@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 
 import ru.ecostudiovl.turtlegraphic.R;
 
@@ -15,47 +17,31 @@ public class MainActivity extends AppCompatActivity {
 
 
     private MyTurtleView myTurtleView;
-    private FrameLayout graphicFrame;
-    private SeekBar seekBar;
-    private Button btnEnter;
-    private EditText etName;
+    private Spinner figuresSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initializeScreenElements();
+    }
 
+    private void initializeScreenElements(){
         myTurtleView = findViewById(R.id.myView);
 
-        etName = findViewById(R.id.etFigureName);
-        btnEnter = findViewById(R.id.btnEnter);
-        btnEnter.setOnClickListener(new View.OnClickListener() {
+        figuresSpinner = findViewById(R.id.figuresSpinner);
+        figuresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if (!etName.getText().toString().isEmpty() && etName.getText().toString().length() > 0){
-                    myTurtleView.setFigure(etName.getText().toString());
-                }
-            }
-        });
-
-
-        seekBar = findViewById(R.id.seekBar);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Выставляем индекс фигуры, в зависимости от выбранного элемента
+                myTurtleView.setFigure(position);
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
 
     }
 

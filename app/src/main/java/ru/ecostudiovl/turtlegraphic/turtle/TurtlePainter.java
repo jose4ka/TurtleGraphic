@@ -38,6 +38,47 @@ public class TurtlePainter extends Turtle {
         }
     }
 
+    public void drawDoubleCircle(Canvas canvas, Paint paint){
+        for (int i = 0; i < 700; i++) {
+            dl = 5;
+            draw(dl, canvas, paint);
+            plusAngle(1);
+        }
+
+        //Сбрасываем значения
+        posX = canvas.getWidth() / 2;
+        posY = canvas.getHeight() / 2;
+        angle = 0;
+
+        //Рисуем круг, но уже меньше
+        for (int i = 0; i < 700; i++) {
+            dl = 2;
+            draw(dl, canvas, paint);
+            plusAngle(1);
+        }
+    }
+
+    public void drawCircleInSquare(Canvas canvas, Paint paint){
+        //Сначала рисуем квадрат
+        for (int i = 0; i < 5; i++) {
+            dl = 200;
+            draw(dl, canvas, paint);
+            plusAngle(90);
+        }
+
+        //Сбрасываем значения
+        posX = canvas.getWidth() / 2;
+        posY = canvas.getHeight() / 2;
+        angle = 0;
+
+        //Рисуем круг, но уже меньше
+        for (int i = 0; i < 700; i++) {
+            dl = 1.75f;
+            draw(dl, canvas, paint);
+            plusAngle(1);
+        }
+    }
+
     public void drawSquareSpiral(Canvas canvas, Paint paint){
         for (int i = 0; i < 100; i++) {
             draw(dl, canvas, paint);

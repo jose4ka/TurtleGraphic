@@ -101,6 +101,10 @@ public class MyTurtleView extends View {
                 turtle = new TurtleFractal((0), canvas.getHeight()/2, 0);
                 ((TurtleFractal) turtle).drawKoh(10, 10, canvas, p);
                 break;
+            case 15:
+                turtle = new TurtlePainter((canvas.getWidth()/2) - 100, canvas.getHeight()/2, 0);
+                ((TurtlePainter) turtle).drawCircleInSquareWithRadius(canvas, p, 100);
+                break;
             case 2323://Заданная команда
                 turtle = new TurtleCommander((canvas.getWidth()/2), canvas.getHeight()/2, 0);
                 ((TurtleCommander) turtle).drawCommand(commandToDraw, canvas, p);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     private MyTurtleView myTurtleView;
     private Spinner figuresSpinner;
+    private EditText etFormula;
+    private Button btnEnterFormula;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        etFormula  = findViewById(R.id.etFormulaInput);
+
+        btnEnterFormula = findViewById(R.id.btnFormulaEnter);
+        btnEnterFormula.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etFormula.getText().toString() != null){
+                    myTurtleView.drawCommand(etFormula.getText().toString());
+                }
             }
         });
 

@@ -7,7 +7,10 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import ru.ecostudiovl.turtlegraphic.turtle.TurtleCommander;
 import ru.ecostudiovl.turtlegraphic.turtle.Turtle;
+import ru.ecostudiovl.turtlegraphic.turtle.TurtleColored;
+import ru.ecostudiovl.turtlegraphic.turtle.TurtleFractal;
 import ru.ecostudiovl.turtlegraphic.turtle.TurtlePainter;
 import ru.ecostudiovl.turtlegraphic.turtle.TurtleRecursive;
 
@@ -16,6 +19,7 @@ public class MyTurtleView extends View {
 
 
     private int figure;
+    private String commandToDraw;
 
     public MyTurtleView(Context context, AttributeSet att){
         super(context, att);
@@ -77,8 +81,37 @@ public class MyTurtleView extends View {
                 turtle = new TurtlePainter((canvas.getWidth()/2) - 100, canvas.getHeight()/2, 0);
                 ((TurtlePainter) turtle).drawCircleInSquare(canvas, p);
                 break;
+            case 10:
+                turtle = new TurtleColored((canvas.getWidth()/2), canvas.getHeight()/2, 0);
+                ((TurtleColored) turtle).drawSpiral(canvas, p);
+                break;
+            case 11:
+                turtle = new TurtleColored((canvas.getWidth()/2), canvas.getHeight()/2, 0);
+                ((TurtleColored) turtle).drawSquare(canvas, p);
+                break;
+            case 12:
+                turtle = new TurtleColored((canvas.getWidth()/2), canvas.getHeight()/2, 0);
+                ((TurtleColored) turtle).drawCircle(canvas, p);
+                break;
+            case 13:
+                turtle = new TurtleColored((canvas.getWidth()/2), canvas.getHeight()/2, 0);
+                ((TurtleColored) turtle).drawHexagon(canvas, p);
+                break;
+            case 14:
+                turtle = new TurtleFractal((0), canvas.getHeight()/2, 0);
+                ((TurtleFractal) turtle).drawKoh(10, 10, canvas, p);
+                break;
+            case 2323://Заданная команда
+                turtle = new TurtleCommander((canvas.getWidth()/2), canvas.getHeight()/2, 0);
+                ((TurtleCommander) turtle).drawCommand(commandToDraw, canvas, p);
+                break;
             default:
         }
+    }
+
+    public void drawCommand(String commandToDraw){
+        this.commandToDraw = commandToDraw;
+        figure = 2323;
     }
 
     public void setFigure(int figure) {

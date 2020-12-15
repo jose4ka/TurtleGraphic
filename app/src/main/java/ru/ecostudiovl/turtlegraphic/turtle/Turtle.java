@@ -51,12 +51,12 @@ public class Turtle {
 
     //Брибавляем угол поворота
     public void plusAngle(float teta){
-        angle = angle + ((teta * (float)Math.PI) / 180);
+        angle += ((teta * (float)Math.PI) / 180);
     }
 
     //Отнимаем угол поворота
     public void minusAngle(float teta){
-        angle = angle - ((teta * (float)Math.PI) / 180);
+        angle -= ((teta * (float)Math.PI) / 180);
     }
 
     //Сеттеры
